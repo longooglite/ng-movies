@@ -1,9 +1,25 @@
-import { Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit, Signal, signal } from '@angular/core'
+import { MoviesService } from '../../services/MoviesService'
+import { Movie } from '../../types/types'
+import { MovieListEntry } from '../movie-list-entry/movie-list-entry'
 
 @Component({
   selector: 'app-movie-list',
-  imports: [],
+  imports: [MovieListEntry],
   templateUrl: './movie-list.html',
   styleUrl: './movie-list.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovieList {}
+export class MovieList implements OnInit {
+  private moviesService = inject(MoviesService)
+  movies = signal<Movie[]>([])
+  movieTitles = computed(() => this.movies().map((movie) => movie.title))
+  ngOnInit(): void {
+    this.moviesService.movies$.subscribe((moviesData) => {
+      this.movies.set(moviesData)
+    })
+  }
+  getMovies(): Movie[] {
+    return this.movies()
+  }
+}
