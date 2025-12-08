@@ -5,9 +5,18 @@ import { routes } from './app.routes'
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser'
 import { provideHttpClient } from '@angular/common/http'
 import { provideApollo } from 'apollo-angular'
-import { HttpLink } from 'apollo-angular/http'
-import { InMemoryCache } from '@apollo/client'
+import { InMemoryCache, HttpLink } from '@apollo/client'
 import { environment } from '../environments/environment'
+
+const apiKey = environment.env.AWS_API_KEY
+const apiUrl = environment.env.API_URL
+
+const httpLink = new HttpLink({
+  uri: apiUrl,
+  headers: {
+    'x-api-key': apiKey,
+  }
+})
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,12 +25,8 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(),
     provideApollo(() => {
-      const httpLink = inject(HttpLink)
-
       return {
-        link: httpLink.create({
-          uri: environment.env.API_URL,
-        }),
+        link: httpLink,
         cache: new InMemoryCache(),
       }
     }),
