@@ -1,0 +1,45 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - corepack enable
+        - corepack prepare yarn@1.22.22 --activate
+        - yarn install --frozen-lockfile
+    build:
+      commands:
+        # Use AWS_BRANCH to decide which env to build
+        - echo "Building branch: $AWS_BRANCH"
+        - |
+          if [ "$AWS_BRANCH" = "staging" ] || [ "$AWS_BRANCH" = "stage" ]; then
+            echo "Applying staging environment substitutions to environment.staging.ts"
+            TARGET_FILE="src/environments/environment.staging.ts"
+          else
+            echo "Applying production environment substitutions to environment.ts"
+            TARGET_FILE="src/environments/environment.ts"
+          fi
+          # Replace all placeholders of the form <%= APP_* %> with their corresponding env var values
+          for var in $(env | grep '^APP_' | awk -F= '{print $1}'); do
+            VAL="${!var}"
+            VAL="${VAL//\\/\\\\}"
+            VAL="${VAL//&/\\&}"
+            VAL="${VAL//|/\\|}"
+            echo "Injecting $var into $TARGET_FILE"
+            sed -i -e "s|<%= ${var} %>|${VAL}|g" "$TARGET_FILE"
+          done
+          # Build with the correct configuration
+          if [ "$AWS_BRANCH" = "staging" ] || [ "$AWS_BRANCH" = "stage" ]; then
+            yarn build -c staging
+          else
+            yarn build -c production
+          fi
+  artifacts:
+    # Use the browser output as the artifact directory for static hosting
+    baseDirectory: dist/ng-movies/browser
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .yarn/**/*
+      - yarn.lock

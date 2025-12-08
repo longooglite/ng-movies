@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "predev": "node scripts/pre-dev.mjs",
+    "dev": "node scripts/pre-dev.mjs && ng serve -c development",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -25,7 +27,7 @@
     ]
   },
   "private": true,
-  "packageManager": "npm@10.9.4",
+  "packageManager": "yarn@1.22.22",
   "dependencies": {
     "@angular/common": "^21.0.0",
     "@angular/compiler": "^21.0.0",
@@ -49,6 +51,7 @@
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "jsdom": "^27.1.0",
+    "dotenv": "^16.4.5",
     "prettier": "^3.7.4",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"

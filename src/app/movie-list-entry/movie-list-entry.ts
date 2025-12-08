@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core'
 import { Movie } from '../../types/types'
 
 @Component({
@@ -9,5 +9,5 @@ import { Movie } from '../../types/types'
   inputs: ['movie'],
 })
 export class MovieListEntry {
-  @Input() movie!: Movie;
+  @Input() movie!: Movie
 }
