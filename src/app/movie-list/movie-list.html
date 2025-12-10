@@ -1,4 +1,11 @@
-@for (movie of getMovies(); track movie) {
-    <app-movie-list-entry [movie]="movie">
-    </app-movie-list-entry>
+@if (moviesLoading()) {
+    <div class="movies-loading">
+        <p>Loading movies...</p>
+    </div>
+}
+@else {
+    @for (movie of getMovies(); track movie) {
+            <app-movie-list-entry [movie]="movie">
+            </app-movie-list-entry>
+        }
 }
