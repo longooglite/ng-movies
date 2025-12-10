@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Subject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { Apollo } from 'apollo-angular'
 import { LIST_MOVIES_QUERY } from '../queries/listMovies'
 import { Filter, FILTER_KEYS, Movie } from '../types/types'
@@ -76,6 +76,7 @@ export class MoviesService {
   private moviesLoadingSubject = new BehaviorSubject<boolean>(true)
   movies$ = this.moviesSubject.asObservable()
   filteredMovies$ = this.filteredMoviesSubject.asObservable()
+  moviesLoading$ = this.moviesLoadingSubject.asObservable()
   updateFilter(filterKey: FILTER_KEYS, value: any) {
     const filter = this.filters.find((filter) => filter.key === filterKey)
     if (!filter) return
