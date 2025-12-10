@@ -1,5 +1,24 @@
-{{ movie.title }}
-
--
-
-{{ movie.year }}
+<h4>{{ movie.title }}</h4>
+<span>{{ movie.director }}</span>
+<span>{{ movie.year }}</span>
+<button (click)="toggleExpanded()">
+    {{ expanded() ? 'Hide' : 'Show' }}
+</button>
+<div class="expanded-content" [class.expanded]="expanded()">
+    <span class="expanded-content-item" ngIf="movie.genre">
+        <span class="expanded-content-item-label">Genre:</span>
+        {{ movie.genre }}
+    </span>
+    <span class="expanded-content-item" ngIf="movie.country">
+        <span class="expanded-content-item-label">Country:</span>
+        {{ movie.country }}
+    </span>
+    <span class="expanded-content-item" ngIf="movie.watched !== undefined"> 
+        <span class="expanded-content-item-label">Watched:</span>
+        {{ movie.watched ? 'Watched' : 'Not watched' }}
+    </span>
+    <span class="expanded-content-item" ngIf="movie.description !== undefined">
+        <span class="expanded-content-item-label">Description:</span>
+        {{ movie.description }}
+    </span>
+</div>

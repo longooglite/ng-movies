@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, signal } from '@angular/core'
 import { Movie } from '../../types/types'
 
 @Component({
@@ -10,4 +10,8 @@ import { Movie } from '../../types/types'
 })
 export class MovieListEntry {
   @Input() movie!: Movie
+  expanded = signal(false)
+  toggleExpanded() {
+    this.expanded.set(!this.expanded())
+  }
 }

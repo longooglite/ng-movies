@@ -1,9 +1,4 @@
-<p>movie-list works!</p>
-<ul>
-    @for (movie of getMovies(); track movie) {
-        <li>
-            <app-movie-list-entry [movie]="movie">
-            </app-movie-list-entry>
-        </li>
-    }
-</ul>
+@for (movie of getMovies(); track movie) {
+    <app-movie-list-entry [movie]="movie">
+    </app-movie-list-entry>
+}

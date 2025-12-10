@@ -1,0 +1,39 @@
+:host {
+    --needed-space: calc(2 * var(--padding-width) + 2 * var(--border-width) + 2 *var(--margin-width));
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - var(--needed-space));
+    margin-left: var(--margin-width);
+    margin-bottom: var(--margin-width);
+    padding-left: var(--padding-width);
+    padding-bottom: var(--padding-width);
+    border-left: var(--border-width) solid var(--border-color);
+    border-bottom: var(--border-width) solid var(--border-color);
+
+    button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        color: #000;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        text-decoration-thickness: 1px;
+        text-decoration-color: #000;
+    }
+    .expanded-content {
+        display: flex;
+        transition: height 0.1s ease;
+        height: 0;
+        flex-direction: column;
+        overflow-y: hidden;
+
+        .expanded-content-item-label {
+            font-weight: bold;
+        }
+    }
+    .expanded-content.expanded {
+        height: auto;
+    }
+
+}
