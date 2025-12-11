@@ -1,9 +1,12 @@
-<div class="header-left">
-    <app-icon icon="mdi:menu"></app-icon>
-</div>
-<h1>Movie List</h1>
-<div class="header-right">
-    @if (isMobile()) {
-        <app-icon icon="mdi:filter-variant"></app-icon>
-    }
-</div>
+<header>
+    <div class="header-left">
+        <app-icon icon="mdi:menu"></app-icon>
+    </div>
+    <h1>Movie List</h1>
+    <div class="header-right">
+        @if (isMobile()) {
+            <app-icon icon="mdi:filter-variant"></app-icon>
+        }
+    </div>
+</header>
+<app-filter-row></app-filter-row>

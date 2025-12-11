@@ -1,11 +1,11 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core'
-import { RouterOutlet } from '@angular/router'
 import { MovieList } from './movie-list/movie-list'
 import { AppHeader } from './app-header/app-header'
+import { FilterRow } from './filter-row/filter-row'
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MovieList, AppHeader],
+  imports: [MovieList, AppHeader, FilterRow],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

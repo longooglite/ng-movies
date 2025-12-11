@@ -2,10 +2,11 @@ import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, signal } f
 import { ScreenSizeService } from '../../services/ScreenSizeService';
 import { ScreenSize, ScreenSizesEnum } from '../../consts/globals'
 import { AppIcon } from '../app-icon/app-icon'
+import { FilterRow } from '../filter-row/filter-row'
 
 @Component({
   selector: 'app-header',
-  imports: [AppIcon],
+  imports: [AppIcon, FilterRow],
   templateUrl: './app-header.html',
   styleUrl: './app-header.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],  

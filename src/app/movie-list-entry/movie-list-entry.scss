@@ -21,7 +21,7 @@
         border: none;
         cursor: pointer;
         font-size: 14px;
-        color: #000;
+        color: var(--text-color);
         outline: none;
 
         &:focus, &:hover {
