@@ -27,18 +27,13 @@ export class MoviesService {
       this.filterMovies()
     })
   }
-  private filters: Filter[] = [{
+  private filters = new BehaviorSubject<Filter[]>([
+    {
       key: FILTER_KEYS.YEAR,
       type: 'number',
       active: false,
       value: null,
       validator: numberValidator(FILTER_KEYS.YEAR),
-    }, {
-      key: FILTER_KEYS.DIRECTOR,
-      type: 'string',
-      active: false,
-      value: null,
-      validator: stringValidator(FILTER_KEYS.DIRECTOR),
     }, {
       key: FILTER_KEYS.TITLE,
       type: 'string',
@@ -46,17 +41,29 @@ export class MoviesService {
       value: null,
       validator: stringValidator(FILTER_KEYS.TITLE),
     }, {
+      key: FILTER_KEYS.DIRECTOR,
+      type: 'string',
+      active: false,
+      value: null,
+      validator: stringValidator(FILTER_KEYS.DIRECTOR),
+    }, {
       key: FILTER_KEYS.GENRE,
       type: 'multi select',
       active: false,
       value: null,
       validator: multiSelectValidator(FILTER_KEYS.GENRE),
     }, {
-      key: FILTER_KEYS.COUNTRY,
-      type: 'string',
+      key: FILTER_KEYS.DECADE,
+      type: 'multi select',
       active: false,
       value: null,
-      validator: stringValidator(FILTER_KEYS.COUNTRY),
+      validator: multiSelectValidator(FILTER_KEYS.DECADE),
+    }, {
+      key: FILTER_KEYS.COUNTRY,
+      type: 'multi select',
+      active: false,
+      value: null,
+      validator: multiSelectValidator(FILTER_KEYS.COUNTRY),
     }, {
       key: FILTER_KEYS.FORMAT,
       type: 'string',
@@ -70,29 +77,33 @@ export class MoviesService {
       value: null,
       validator: booleanValidator(FILTER_KEYS.WATCHED),
     }
-  ]
+  ])
   private moviesSubject = new BehaviorSubject<Movie[]>([])
   private filteredMoviesSubject = new BehaviorSubject<Movie[]>([])
   private moviesLoadingSubject = new BehaviorSubject<boolean>(true)
   movies$ = this.moviesSubject.asObservable()
   filteredMovies$ = this.filteredMoviesSubject.asObservable()
   moviesLoading$ = this.moviesLoadingSubject.asObservable()
+  filters$ = this.filters.asObservable()
   updateFilter(filterKey: FILTER_KEYS, value: any) {
-    const filter = this.filters.find((filter) => filter.key === filterKey)
-    if (!filter) return
-    if (value === null) {
-      filter.active = false
-      filter.value = null
-    } else {
-      filter.value = value
-      filter.active = true
-    }
+    const nextFilters = this.filters.value.map((f) => {
+      if (f.key !== filterKey) return f
+      if (Array.isArray(value)) {
+        if (value.length === 0) {
+          return { ...f, value: null, active: false }
+        }
+        return { ...f, value: value, active: true }
+      }
+      const active = value !== null
+      return { ...f, value: active ? value : null, active }
+    })
+    this.filters.next(nextFilters)
     this.filterMovies()
   }
   filterMovies() {
     const currentMovies = this.moviesSubject.value
     const filteredMovies = currentMovies.filter((movie) => {
-      return this.filters.every((filter) => {
+      return this.filters.value.every((filter) => {
         if (!filter.active) return true
         return filter.validator(movie, filter.value)
       })
