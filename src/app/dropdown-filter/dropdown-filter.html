@@ -1,0 +1,18 @@
+
+<button (click)="toggleExpanded()">
+    <div class="filter-header">
+        <span class="filter-key">{{ filterKey.charAt(0).toUpperCase() + filterKey.slice(1) }}</span>
+        <app-icon [icon]="expanded() ? 'mdi:caret-up' : 'mdi:caret-down'"></app-icon>
+    </div>
+    @if (filterActive() && !expanded()) {
+        <span class="filter-value">{{ filterValueText() }}</span>
+    }
+</button>
+<div [class.visible]="expanded()" class="dropdown-filter-content">
+    @if (filterType() === 'boolean') {
+        <app-boolean-filter [filterKey]="filterKey"></app-boolean-filter>
+    }
+    @if (filterType() === 'multi select') {
+        <app-multi-select-filter [filterKey]="filterKey"></app-multi-select-filter>
+    }
+</div>

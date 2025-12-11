@@ -1,0 +1,17 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    > button {
+        display: flex;
+        flex-direction: row;
+        width: 50%;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 0.8rem;
+        text-align: left;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}

@@ -1,0 +1,14 @@
+:host {
+    position: relative;
+    input {
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        color: var(--text-color);
+        background-color: var(--primary-color);
+        border-bottom: var(--border-width) solid var(--border-color);
+        padding: var(--padding-width);
+        width: 100%;
+        box-sizing: border-box;
+    }
+}

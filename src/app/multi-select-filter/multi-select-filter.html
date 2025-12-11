@@ -1,0 +1,13 @@
+@for (option of options(); track option) {
+    <button
+        (click)="updateFilterValue(option)"
+    >
+        <app-icon
+            [icon]="getIcon(option)"
+            [width]="16"
+            [height]="16"
+        >
+        </app-icon>
+        {{ option }}
+    </button>
+}

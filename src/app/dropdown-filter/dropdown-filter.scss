@@ -1,0 +1,56 @@
+
+:host {
+    position: relative;
+    display: flex;
+    align-items: center;
+    button {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: var(--text-color);
+        outline: none;
+        font-size: 1rem;
+        &:hover {
+            font-weight: bold;
+        }
+        .filter-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .filter-value {
+            font-size: 0.8rem;
+            color: var(--secondary-highlight-color);
+            font-weight: normal;
+            text-transform: capitalize;top: 100%;
+            position: absolute;
+            background: var(--primary-color);
+            border-bottom: solid var(--border-color) 1px;
+            border-left: solid var(--border-color) 1px;
+            border-right: solid var(--border-color) 1px;
+            width: calc(100% - 2px);
+            left: 0;
+            padding-bottom: 5px;
+        }
+    }
+    .dropdown-filter-content {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--primary-light);
+        border-bottom: var(--border-width) solid var(--border-color);
+        border-left: var(--border-width) solid var(--border-color);
+        border-right: var(--border-width) solid var(--border-color);
+        padding: var(--padding-width);
+        display: none;
+        width: calc(100% - var(--padding-width));
+        font-size: 0.8rem;
+        &.visible {
+            display: block;
+        }
+    }
+}

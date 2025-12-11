@@ -1,0 +1,17 @@
+:host {
+    display: flex;
+    &.horizontal {
+        flex-direction: row;
+    }
+    &.vertical {
+        flex-direction: column;
+    }
+    input {
+        display: none;
+    }
+    label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+}

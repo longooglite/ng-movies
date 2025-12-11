@@ -1,0 +1,43 @@
+
+<label>
+    <input
+        type="radio"
+        [value]="true"
+        (input)="updateFilterValue(true)"
+        [checked]="filterValue() === true"
+    />
+    @if (filterValue() === true) {
+        <app-icon icon="mdi:radiobox-marked"></app-icon>
+    } @else {
+        <app-icon icon="mdi:radiobox-blank"></app-icon>
+    }
+    {{ labels.true }}
+</label>
+<label>
+    <input
+        type="radio"
+        [value]="null"
+        (input)="updateFilterValue(null)"
+        [checked]="filterValue() === null"
+    />
+    @if (filterValue() === null) {
+        <app-icon icon="mdi:radiobox-marked"></app-icon>
+    } @else {
+        <app-icon icon="mdi:radiobox-blank"></app-icon>
+    }
+    {{ labels.null }}
+</label>
+<label>
+    <input
+        type="radio"
+        [value]="false"
+        (input)="updateFilterValue(false)"
+        [checked]="filterValue() === false"
+    />
+    @if (filterValue() === false) {
+        <app-icon icon="mdi:radiobox-marked"></app-icon>
+    } @else {
+        <app-icon icon="mdi:radiobox-blank"></app-icon>
+    }
+    {{ labels.false }}
+</label>
