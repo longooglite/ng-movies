@@ -1,0 +1,9 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    > * {
+        flex: 1;
+        border-bottom: var(--border-width) solid var(--border-color);
+        padding: var(--padding-width);
+    }
+}

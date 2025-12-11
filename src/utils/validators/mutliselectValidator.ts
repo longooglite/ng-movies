@@ -5,7 +5,7 @@ export const multiSelectValidator =
   (movie: Movie, value: (string | number)[]): boolean => {
     if (!movie[filterKey]) return false
     if (Array.isArray(movie[filterKey])) {
-      return movie[filterKey].some((genre: string) => value.includes(genre))
+      return movie[filterKey].some((value: string) => String(value).includes(String(value)))
     }
-    return value.includes(movie[filterKey] as string | number)
+    return String(value).toLowerCase().includes(String(movie[filterKey]).toLowerCase())
   }
