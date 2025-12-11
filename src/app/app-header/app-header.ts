@@ -1,10 +1,11 @@
 import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, signal } from '@angular/core';
 import { ScreenSizeService } from '../../services/ScreenSizeService';
 import { ScreenSize, ScreenSizesEnum } from '../../consts/globals'
+import { AppIcon } from '../app-icon/app-icon'
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [AppIcon],
   templateUrl: './app-header.html',
   styleUrl: './app-header.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],  
